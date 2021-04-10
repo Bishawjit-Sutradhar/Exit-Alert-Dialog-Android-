@@ -1,0 +1,46 @@
+package com.example.androidexitalertdialog;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.DialogInterface;
+import android.os.Bundle;
+
+public class MainActivity extends AppCompatActivity {
+
+    AlertDialog.Builder ExitDialog;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+
+    public void loadExitDialog(){
+
+        ExitDialog=new AlertDialog.Builder(MainActivity.this);
+        ExitDialog.setMessage("Do you want to Exit?");
+        ExitDialog.setTitle("My App");
+        ExitDialog.setCancelable(false);
+        ExitDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        ExitDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog alertDialog=ExitDialog.create();
+        alertDialog.show();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        loadExitDialog();
+    }
+}
